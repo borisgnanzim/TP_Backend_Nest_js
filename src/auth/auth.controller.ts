@@ -23,6 +23,7 @@ export class AuthController {
         return this.authService.login(loginDto);
     }
 
+    @Throttle({ default: { limit: 2, ttl: 60000 } })
     @UseGuards(JwtAuthGuard)
     @Get('profile')
     @HttpCode(HttpStatus.OK)
